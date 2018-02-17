@@ -18,8 +18,9 @@ namespace DictionaryScraper
             IDetailRepository detailRepo = new DetailRepository();
             IExampleRepository exampleRepo = new ExampleRepository();
             ISynonymRepository synonymRepo = new SynonymRepository();
+            ISubsenseRepository subsenseRepo = new SubsenseRepository();
 
-            Scraper obj = new Scraper(wordRepo, detailRepo, exampleRepo, synonymRepo);
+            Scraper obj = new Scraper(wordRepo, detailRepo, exampleRepo, synonymRepo, subsenseRepo);
             obj.ScrapeAll();
             
         }

@@ -12,6 +12,7 @@ namespace DictionaryScraper.Models
         [Key]
         public int ID { get; set; }
         public int DetailsID { get; set; }
+        public int? SubsenseID { get; set; }
         public string Ex { get; set; }
     }
 }
