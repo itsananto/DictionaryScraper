@@ -18,7 +18,7 @@ namespace FirebaseBatchInsert
         static async void func()
         {
 
-            var words = db.GetList<Words>().Where(x=>x.Wrd=="water");
+            var words = db.GetList<Words>();
             var details = db.GetList<Details>();
             var examples = db.GetList<Examples>();
             var subsenses = db.GetList<Subsenses>();
