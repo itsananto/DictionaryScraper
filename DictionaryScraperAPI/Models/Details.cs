@@ -14,6 +14,12 @@ namespace DictionaryScraperAPI.Models
         public int WordID { get; set; }
         public string POS { get; set; }
         public string Definition { get; set; }
+        public string[] ExampleList { get; set; }
+        public string[] SynonymList { get; set; }
+        [JsonIgnore]
         public IEnumerable<Examples> Examples { get; set; }
+        [JsonIgnore]
+        public IEnumerable<Synonyms> Synonyms { get; set; }
+        public IEnumerable<Subsenses> Subsenses { get; set; }
     }
 }

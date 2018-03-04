@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryScraper", "Dictio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryScraperAPI", "DictionaryScraperAPI\DictionaryScraperAPI.csproj", "{0C872398-9841-46AC-915B-297F7343DD5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebaseBatchInsert", "FirebaseBatchInsert\FirebaseBatchInsert.csproj", "{C529416A-BCBD-452F-839A-680A051C9FD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0C872398-9841-46AC-915B-297F7343DD5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C872398-9841-46AC-915B-297F7343DD5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C872398-9841-46AC-915B-297F7343DD5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C529416A-BCBD-452F-839A-680A051C9FD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C529416A-BCBD-452F-839A-680A051C9FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C529416A-BCBD-452F-839A-680A051C9FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C529416A-BCBD-452F-839A-680A051C9FD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

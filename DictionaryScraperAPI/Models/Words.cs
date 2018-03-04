@@ -10,7 +10,7 @@ namespace DictionaryScraperAPI.Models
     {
         [JsonIgnore]
         public int ID { get; set; }
-        public string Descr { get; set; }
+        public string Wrd { get; set; }
 
         public IEnumerable<Details> Details { get; set; }
     }
