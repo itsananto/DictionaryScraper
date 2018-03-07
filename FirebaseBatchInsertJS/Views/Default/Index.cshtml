@@ -4,17 +4,55 @@
 }
 
 <h2>Index</h2>
-
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
 <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDRC5H6C9oTqU6PwsLC4IkuV1zxMDdfx-g",
+        authDomain: "dictionary-ea2bb.firebaseapp.com",
+        databaseURL: "https://dictionary-ea2bb.firebaseio.com",
+        projectId: "dictionary-ea2bb",
+        storageBucket: "dictionary-ea2bb.appspot.com",
+        messagingSenderId: "665540583523"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+    
+
     $.ajax({
         dataType: "json",
         url: "http://localhost:11552/WordList",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        type: "GET", /* or type:"GET" or type:"PUT" */
         data: {},
-        success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-
-            }
+        success: insertFireBase,
+        error: function (data) {
+            console.log(data);
         }
     });
+
+    function insertFireBase(data) {
+        var i;
+        for (i = 0; i < data.length; i++) {
+            $.ajax({
+                dataType: "json",
+                url: "http://localhost:11552/Word/" + data[i],
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                type: "GET", /* or type:"GET" or type:"PUT" */
+                data: {},
+                success: function (data) {
+                    firebase.database().ref('dictionary/' + data[i]).set(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+    }
 
 </script>

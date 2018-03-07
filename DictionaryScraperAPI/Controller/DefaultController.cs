@@ -29,8 +29,8 @@ namespace DictionaryScraperAPI.Controller
         [Route("WordList")]
         public IHttpActionResult GetWordList()
         {
-            var words = db.GetList<Words>();        
-            return Ok(words.Select(x=>x.Wrd));
+            var words = db.GetList<Words>();
+            return Ok(words.Select(x => x.Wrd));
         }
 
         /// <summary>
@@ -40,33 +40,40 @@ namespace DictionaryScraperAPI.Controller
         /// <returns></returns>
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        [Route("Word/{word}")]
-        public IHttpActionResult GetWordList(string word)
+        [Route("Word/{w}")]
+        public IHttpActionResult GetWordList(string w)
         {
-            var w = db.GetList<Words>().First(x=>x.Wrd==word);
-            var details = db.GetList<Details>();
+            string wordSQL = "SELECT * FROM WORDS WHERE WRD = @WORD";
+            string detailsSQL = "SELECT * FROM DETAILS WHERE WORDID = @ID";
+            string examplesSQL = "SELECT * FROM EXAMPLES WHERE DETAILSID = @ID AND SUBSENSEID = NULL";
+            string examplesSubsensesSQL = "SELECT * FROM EXAMPLES WHERE SUBSENSEID = @ID";
+            string synonymsSQL = "SELECT * FROM SYNONYMS WHERE DETAILSID = @ID";
+            string subsensesSQL = "SELECT * FROM SUBSENSES WHERE DETAILSID = @ID";
+
+            var word = db.QueryFirst<Words>(wordSQL, new { WORD = w });
+
             var examples = db.GetList<Examples>();
             var subsenses = db.GetList<Subsenses>();
             var synonyms = db.GetList<Synonyms>();
 
-            w.Details = details.Where(x => x.WordID == w.ID);
-            foreach (var d in w.Details)
+            word.Details = db.Query<Details>(detailsSQL, new { ID = word.ID });
+            foreach (var d in word.Details)
             {
-                d.Examples = examples.Where(x => x.DetailsID == d.ID && x.SubsenseID == null);
+                d.Examples = db.Query<Examples>(examplesSQL, new { ID = d.ID });
                 d.ExampleList = d.Examples.Select(x => x.Ex).ToArray();
 
-                d.Synonyms = synonyms.Where(x => x.DetailsID == d.ID);
+                d.Synonyms = db.Query<Synonyms>(synonymsSQL, new { ID = d.ID });
                 d.SynonymList = d.Synonyms.Select(x => x.Syn).ToArray();
 
-                d.Subsenses = subsenses.Where(x => x.DetailsID == d.ID);
+                d.Subsenses = db.Query<Subsenses>(subsensesSQL, new { ID = d.ID });
                 foreach (var s in d.Subsenses)
                 {
-                    s.Examples = examples.Where(x => x.SubsenseID == s.ID);
+                    s.Examples = db.Query<Examples>(examplesSubsensesSQL, new { ID = s.ID });
                     s.ExampleList = s.Examples.Select(x => x.Ex).ToArray();
                 }
             }
 
-            return Ok(w);
+            return Ok(word);
         }
 
         /// <summary>
