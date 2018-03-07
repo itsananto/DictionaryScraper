@@ -34,19 +34,19 @@
         }
     });
 
-    function insertFireBase(data) {
+    function insertFireBase(words) {
         var i;
-        for (i = 0; i < data.length; i++) {
+        for (i = 0; i < words.length; i++) {
             $.ajax({
                 dataType: "json",
-                url: "http://localhost:11552/Word/" + data[i],
+                url: "http://localhost:11552/Word/" + words[i],
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 type: "GET", /* or type:"GET" or type:"PUT" */
                 data: {},
                 success: function (data) {
-                    firebase.database().ref('dictionary/' + data[i]).set(data);
+                    firebase.database().ref('dictionary/' + data.Wrd).set(data.Details);
                 },
                 error: function (data) {
                     console.log(data);

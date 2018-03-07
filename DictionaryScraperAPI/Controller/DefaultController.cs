@@ -41,7 +41,7 @@ namespace DictionaryScraperAPI.Controller
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("Word/{w}")]
-        public IHttpActionResult GetWordList(string w)
+        public IHttpActionResult GetWordDetils(string w)
         {
             string wordSQL = "SELECT * FROM WORDS WHERE WRD = @WORD";
             string detailsSQL = "SELECT * FROM DETAILS WHERE WORDID = @ID";
